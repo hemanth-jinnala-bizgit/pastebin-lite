@@ -10,14 +10,17 @@ import { cookies } from "next/headers";
 export const SESSION_COOKIE = "ns_session";
 export const SESSION_MAX_AGE = 60 * 60 * 8; // 8 hours
 
+// Trim env values: dashboards/CLIs sometimes store a trailing newline.
+const env = (k: string) => process.env[k]?.trim() ?? "";
+
 function secret(): string {
-  const s = process.env.SESSION_SECRET;
-  if (!s || s.length < 16) throw new Error("SESSION_SECRET must be set (16+ characters)");
+  const s = env("SESSION_SECRET");
+  if (s.length < 16) throw new Error("SESSION_SECRET must be set (16+ characters)");
   return s;
 }
 
 export function isAuthConfigured(): boolean {
-  return Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD && (process.env.SESSION_SECRET?.length ?? 0) >= 16);
+  return Boolean(env("ADMIN_EMAIL") && env("ADMIN_PASSWORD") && env("SESSION_SECRET").length >= 16);
 }
 
 const mac = (data: string) => createHmac("sha256", secret()).update(data).digest();
@@ -28,8 +31,8 @@ function safeEqual(a: string, b: string): boolean {
 }
 
 export function checkCredentials(email: string, password: string): boolean {
-  const okEmail = safeEqual(email.trim().toLowerCase(), (process.env.ADMIN_EMAIL ?? "").trim().toLowerCase());
-  const okPass = safeEqual(password, process.env.ADMIN_PASSWORD ?? "");
+  const okEmail = safeEqual(email.trim().toLowerCase(), env("ADMIN_EMAIL").toLowerCase());
+  const okPass = safeEqual(password, env("ADMIN_PASSWORD"));
   return okEmail && okPass;
 }
 

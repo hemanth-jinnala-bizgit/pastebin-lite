@@ -6,7 +6,7 @@ import { neon, NeonQueryFunction } from "@neondatabase/serverless";
  * which suits serverless (no pooled connections held across requests).
  */
 export function getSql(): NeonQueryFunction<false, false> {
-  const url = process.env.DATABASE_URL;
+  const url = process.env.DATABASE_URL?.trim();
   if (!url) throw new Error("DATABASE_URL is not set");
   return neon(url);
 }
