@@ -1,0 +1,27 @@
+{
+  "name": "pastebin-lite",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "0.10.4",
+    "@tiptap/pm": "3.31.4",
+    "@tiptap/react": "3.31.4",
+    "@tiptap/starter-kit": "3.31.4",
+    "next": "15.5.27",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "sanitize-html": "2.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.7",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/sanitize-html": "2.16.2",
+    "typescript": "5.7.3"
+  }
+}
