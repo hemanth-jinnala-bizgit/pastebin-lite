@@ -2,6 +2,8 @@
 
 A small Pastebin-style app built with Next.js. Anyone can create a text paste through the API and share a link. Pastes can expire by time (TTL), by number of views, or both. An admin UI ("NoteShare") lets a single admin write rich-text notes and edit, delete, search and share them, with view counts and time left shown for each one.
 
+**Live demo:** https://pastebin-lite-seven-zeta.vercel.app
+
 ## Run locally
 
 Requirements: Node.js 18.18+ and a Postgres database (a free [Neon](https://neon.tech) database works).
